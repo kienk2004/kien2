@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyễn Văn Kiên - Lý lịch khoa học</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --text-dark: #1f2937;
+            --text-light: #4b5563;
+            --bg-academic: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif, system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-academic);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav button:hover, nav button.active {
+            color: var(--primary-color);
+        }
+
+        nav button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25px;
+            right: 25px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        /* Pages container and animations */
+        .pages-container {
+            margin-top: 60px;
+            position: relative;
+            width: 100%;
+            min-height: calc(100vh - 60px);
+        }
+
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: calc(100vh - 60px);
+            padding: 40px 20px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+            display: flex;
+            justify-content: center;
+        }
+
+        .page.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            position: relative;
+        }
+
+        .content-card {
+            background: #ffffff;
+            max-width: 850px;
+            width: 100%;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+        }
+
+        /* Academic Typography */
+        h1 {
+            color: var(--primary-color);
+            font-size: 28px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 30px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 20px;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 5px;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Profile Layout */
+        .profile-container {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: auto;
+            border: 1px solid var(--border-color);
+            padding: 5px;
+            background: #fff;
+        }
+
+        .profile-details {
+            flex: 1;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .contact-info p {
+            margin-bottom: 4px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .content-card {
+                padding: 20px;
+            }
+            nav button {
+                padding: 15px 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <button class="nav-btn active" onclick="switchPage(1)">Trang 1: Thông tin cá nhân</button>
+        <button class="nav-btn" onclick="switchPage(2)">Trang 2: Thông tin về học vấn</button>
+        <button class="nav-btn" onclick="switchPage(3)">Trang 3: Thông tin về công trình nghiên cứu</button>
+    </nav>
+
+    <div class="pages-container">
+        
+        <!-- TRANG 1: THÔNG TIN CÁ NHÂN -->
+        <div id="page-1" class="page active">
+            <div class="content-card">
+                <div class="profile-container">
+                    <img class="profile-img" src="./z7863195038979_ff44bb51d6ecf901f817e6dc3d40fb49.jpg" alt="Nguyễn Văn Kiên">
+                    <div class="profile-details">
+                        <h1>Nguyễn Văn Kiên</h1>
+                        <div class="subtitle">Sinh viên Toán Ứng dụng - Đại học Cần Thơ</div>
+                        
+                        <div class="contact-info">
+                            <p><strong>Số điện thoại:</strong> 0822857243</p>
+                            <p><strong>Gmail:</strong> kvan78025@gmail.com</p>
+                            <p><strong>Địa chỉ:</strong> Cần Thơ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Mục tiêu nghề nghiệp</h2>
+                <ul>
+                    <li>Xử lý và phân tích số liệu thông kê.</li>
+                    <li>Sử dụng các kiến thức toán cơ bản trong giảng dạy.</li>
+                </ul>
+
+                <h2>Kỹ năng mềm</h2>
+                <ul>
+                    <li>Tư duy logic.</li>
+                    <li>Làm việc nhóm.</li>
+                    <li>Tự học, nghiên cứu.</li>
+                </ul>
+
+                <h2>Ngoại ngữ</h2>
+                <ul>
+                    <li>Tiếng Anh: trình độ B1.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TRANG 2: THÔNG TIN VỀ HỌC VẤN -->
+        <div id="page-2" class="page">
+            <div class="content-card">
+                <h1>Học vấn</h1>
+                <div class="subtitle">Quá trình đào tạo đại học</div>
+
+                <div style="margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed var(--border-color);">
+                    <p style="font-size: 18px; font-weight: bold; color: var(--primary-color);">Đại học Cần Thơ</p>
+                    <p style="font-weight: 500;">Trường Khoa học Tự nhiên</p>
+                    <p><strong>Chuyên ngành:</strong> Toán Ứng dụng</p>
+                    <p><strong>Niên khóa:</strong> 2022-2025</p>
+                    <p><strong>GPA:</strong> 3.66/4.0</p>
+                </div>
+
+                <h2>Kỹ năng chuyên môn</h2>
+                <ul>
+                    <li>Mô phỏng.</li>
+                    <li>Mô hình hóa toán học.</li>
+                    <li>Tối ưu hóa và phân tích số.</li>
+                    <li>Phân tích dữ liệu cơ bản.</li>
+                </ul>
+
+                <h2>Tin học</h2>
+                <ul>
+                    <li>Sử dụng cơ bản tin học văn phòng.</li>
+                    <li>Sử dụng cơ bản các phần mềm xử lý số liệu như: R, Matlab, Spss, Python.</li>
+                    <li>Sử dụng cơ bản ngôn ngữ lập trình C.</li>
+                    <li>Soạn thảo văn bản bằng Latex.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TRANG 3: THÔNG TIN VỀ CÔNG TRÌNH NGHIÊN CỨU -->
+        <div id="page-3" class="page">
+            <div class="content-card">
+                <h1>Công trình nghiên cứu</h1>
+                <div class="subtitle">Dự án & Đề tài khoa học</div>
+
+                <div style="margin-bottom: 30px;">
+                    <p style="font-size: 18px; font-weight: bold; color: var(--primary-color); margin-bottom: 10px;">
+                        Dự án / Đề tài: Phân tích dữ liệu được mô phỏng từ những chuyển động ngẫu nhiên và ứng dụng
+                    </p>
+                    <ul>
+                        <li>Nghiên cứu mô hình bước đi ngẫu nhiên một chiều và phân phối giới hạn theo luật số lớn, định lý giới hạn trung tâm.</li>
+                        <li>Mô phỏng bước đi ngẫu nhiên bằng Python.</li>
+                        <li>Kiểm định và trực quan hóa phân phối dữ liệu mô phỏng để đối chiếu với lý thuyết.</li>
+                    </ul>
+                </div>
+
+                <h2>Kinh nghiệm</h2>
+                <ul>
+                    <li>Tham gia nghiên cứu khoa trong lĩnh mô phỏng ở cấp sinh viên.</li>
+                    <li>Tham gia các hoạt động lợi ích cộng đồng.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function switchPage(pageNumber) {
+            // Remove active class from all pages and buttons
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Add active class to target page and button
+            document.getElementById('page-' + pageNumber).classList.add('active');
+            document.querySelectorAll('.nav-btn')[pageNumber - 1].classList.add('active');
+            
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
